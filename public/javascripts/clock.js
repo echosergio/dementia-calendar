@@ -29,7 +29,6 @@ function draw() {
     function face() {
         // Border
         ctx.lineWidth = 8;
-        ctx.strokeStyle = 'black';
         ctx.beginPath();
         ctx.arc(c.x, c.y, 250, 0, Math.PI * 2);
         ctx.stroke();
@@ -41,8 +40,7 @@ function draw() {
                 l = 5;
             if (i % 5 === 0)
                 r -= l,
-                l *= 2,
-                ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+                l *= 2;
             let v = new Vector(r, Math.PI * 2 * (i / 60) - Math.PI / 2);
             ctx.beginPath();
             ctx.moveTo(v.getX() + c.x, v.getY() + c.y);
@@ -53,7 +51,6 @@ function draw() {
 
         // Numbers
         ctx.font = '28px Noto Sans';
-        ctx.fillStyle = 'black';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         for (let i = 1; i <= 12; i++) {
@@ -64,16 +61,13 @@ function draw() {
         // Center button
         ctx.beginPath();
         ctx.arc(c.x, c.y, 6, 0, Math.PI * 2);
-        ctx.fillStyle = 'white';
-        ctx.strokeStyle = 'black';
         ctx.lineWidth = 6;
         ctx.fill();
         ctx.stroke();
     }
 
     function secondHand() {
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
         let a = Math.PI * 2 * (seconds / 60) - Math.PI / 2;
         let v = new Vector(185, a);
@@ -85,7 +79,6 @@ function draw() {
 
     function minuteHand() {
         ctx.lineWidth = 8;
-        ctx.strokeStyle = 'black';
         ctx.beginPath();
         let a = Math.PI * 2 * (minutes / 60) - Math.PI / 2;
         let v = new Vector(185, a);
@@ -96,7 +89,6 @@ function draw() {
 
     function hourHand() {
         ctx.lineWidth = 8;
-        ctx.strokeStyle = 'black';
         ctx.beginPath();
         let a = Math.PI * 2 * (hours / 12) - Math.PI / 2;
         let v = new Vector(130, a);
@@ -106,12 +98,18 @@ function draw() {
     }
 }
 
-function init() {
+function clock(mode) {
     canvas = document.getElementById('clock');
     canvas.width = canvas.height = 600;
     ctx = canvas.getContext('2d');
 
+    ctx.strokeStyle = 'black';
+    ctx.fillStyle = 'black';
+
+    if(mode == 'night') {
+        ctx.strokeStyle = 'white';
+        ctx.fillStyle = 'white';
+    }
+
     setInterval(draw, 10);
 }
-
-init();

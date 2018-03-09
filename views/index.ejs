@@ -9,29 +9,37 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:700" rel="stylesheet">
 </head>
 
-<body>
-	<h1>
-		<%= title %>
-	</h1>
-	<p>Welcome to
-		<%= title %>
-	</p>
+<body <% if (mode == 'night') { %>style="background-color:black; color:white"<% } %>>
+	<div class="main" >
+		<canvas id="clock"></canvas>
 
-	<p id="demo"></p>
+		<script src="/javascripts/vector.js"></script>
+		<script src="/javascripts/clock.js"></script>
+		
+		<% if (mode) { %>
+			<script>
+				clock('<%= mode %>');
+			</script>
+		<% } %>
 
-	<script>
-		var myVar = setInterval(myTimer, 1000);
+		<p id="date"></p>
 
-		function myTimer() {
-			var d = new Date();
-			document.getElementById("demo").innerHTML = d.toLocaleTimeString();
-		}
-	</script>
+		<script>
+			let date = new Date();
 
-	<canvas id="clock"></canvas>
+			let options = {
+				weekday: 'long',
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			};
 
-	<script src="/javascripts/vector.js"></script>
-	<script src="/javascripts/clock.js"></script>
+			document.getElementById("date").innerHTML = "Hoy es " + date.toLocaleDateString('es-ES', options);
+		</script>
+
+
+	</div>
+
 </body>
 
 </html>
