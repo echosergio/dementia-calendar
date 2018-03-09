@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		<%= title %>
+	</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:700" rel="stylesheet">
+</head>
+
+<body>
+	<h1>
+		<%= title %>
+	</h1>
+	<p>Welcome to
+		<%= title %>
+	</p>
+
+	<p id="demo"></p>
+
+	<script>
+		var myVar = setInterval(myTimer, 1000);
+
+		function myTimer() {
+			var d = new Date();
+			document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+		}
+	</script>
+
+	<canvas id="clock"></canvas>
+
+	<script src="/javascripts/vector.js"></script>
+	<script src="/javascripts/clock.js"></script>
+</body>
+
+</html>
