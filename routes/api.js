@@ -7,15 +7,14 @@ router.get('/message', function (req, res, next) {
       order: [
         [db.sequelize.col('Message.createdAt'), 'DESC']
       ]
-    })
-    .then(messages => {
+    }).then(messages => {
       res.send(messages);
     })
 });
 
 router.post('/message', function (req, res, next) {
   db.Message.create({
-    user: req.body.user,
+    user: 'sergio',
     text: req.body.text
   }).then(() => {
     res.sendStatus(200);
