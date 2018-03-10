@@ -2,9 +2,7 @@
 <html>
 
 <head>
-	<title>
-		<%= title %>
-	</title>
+	<title>Dementia Calendar</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:700" rel="stylesheet">
 </head>
@@ -37,6 +35,22 @@
 			document.getElementById("date").innerHTML = "Hoy es " + date.toLocaleDateString('es-ES', options);
 		</script>
 
+		<p id="message"></p>
+
+		<script>
+			var myVar = setInterval(loadMessage, 60000);
+
+			function loadMessage() {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("message").innerHTML = JSON.parse(this.responseText).text;
+					}
+				};
+				xhttp.open("GET", "message", true);
+				xhttp.send();
+			}
+		</script>
 
 	</div>
 
