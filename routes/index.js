@@ -11,48 +11,14 @@ router.get('/', function (req, res, next) {
   var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
   var sunsetStr = times.sunset.getHours() + ':' + times.sunset.getMinutes();
 
-  if (sunriseStr > nowStr > sunsetStr)
+  console.log(sunriseStr + nowStr + sunsetStr)
+  if (sunriseStr < nowStr < sunsetStr)
     var mode = 'day'
   else
-    var mode = 'night'
+    var mode = 'day'
 
-  fs.readFile('message', {
-    encoding: 'utf-8'
-  }, function (err, contents) {
-    if (!err) {
-      res.render('index', {
-        mode: mode,
-        message: contents
-      });
-    } else {
-      console.log(err);
-    }
-  });
-});
-
-router.get('/message', function (req, res, next) {
-  fs.readFile('message', {
-    encoding: 'utf-8'
-  }, function (err, contents) {
-    if (!err) {
-      res.json({
-        text: contents
-      });
-    } else {
-      console.log(err);
-    }
-  });
-});
-
-router.post('/message', function (req, res, next) {
-  fs.writeFile('message', req.body.text, function (err) {
-    if (err) {
-      return console.log(err);
-    }
-
-    res.json({
-      status: 'success'
-    });
+  res.render('index', {
+    mode: mode
   });
 });
 

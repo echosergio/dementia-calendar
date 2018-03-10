@@ -38,16 +38,16 @@
 		<p id="message"></p>
 
 		<script>
-			var myVar = setInterval(loadMessage, 60000);
+			var myVar = setInterval(loadMessage, 1000);
 
 			function loadMessage() {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("message").innerHTML = JSON.parse(this.responseText).text;
+						document.getElementById("message").innerHTML = JSON.parse(this.responseText)[0].text;
 					}
 				};
-				xhttp.open("GET", "message", true);
+				xhttp.open("GET", "api/v1/message", true);
 				xhttp.send();
 			}
 		</script>
