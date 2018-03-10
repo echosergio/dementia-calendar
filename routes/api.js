@@ -14,7 +14,7 @@ router.get('/message', function (req, res, next) {
 
 router.post('/message', function (req, res, next) {
   db.Message.create({
-    username: req.user.username,
+    username: req.body.user.username,
     text: req.body.message.text
   }).then(() => {
     res.sendStatus(200);
