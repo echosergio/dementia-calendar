@@ -35,6 +35,7 @@
 			document.getElementById("date").innerHTML = "Hoy es " + date.toLocaleDateString('es-ES', options);
 		</script>
 
+		<p id="username"></p>
 		<p id="message"></p>
 
 		<script>
@@ -44,6 +45,7 @@
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("username").innerHTML = JSON.parse(this.responseText)[0].username;
 						document.getElementById("message").innerHTML = JSON.parse(this.responseText)[0].text;
 					}
 				};
