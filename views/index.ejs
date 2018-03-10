@@ -3,56 +3,67 @@
 
 <head>
 	<title>Dementia Calendar</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:700" rel="stylesheet">
 </head>
 
 <body <% if (mode == 'night') { %>style="background-color:black; color:white"<% } %>>
-	<div class="main" >
-		<canvas id="clock"></canvas>
+	<div class="main" style="overflow:auto">
 
-		<script src="/javascripts/vector.js"></script>
-		<script src="/javascripts/clock.js"></script>
-		
-		<% if (mode) { %>
+		<div class="clock-div container">
+			<canvas id="clock"></canvas>
+
+			<script src="/javascripts/vector.js"></script>
+			<script src="/javascripts/clock.js"></script>
+			
+			<% if (mode) { %>
+				<script>
+					clock('<%= mode %>');
+				</script>
+			<% } %>
+
+			<p id="date"></p>
+
 			<script>
-				clock('<%= mode %>');
-			</script>
-		<% } %>
+				let date = new Date();
 
-		<p id="date"></p>
-
-		<script>
-			let date = new Date();
-
-			let options = {
-				weekday: 'long',
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric'
-			};
-
-			document.getElementById("date").innerHTML = "Hoy es " + date.toLocaleDateString('es-ES', options);
-		</script>
-
-		<p id="username"></p>
-		<p id="message"></p>
-
-		<script>
-			var myVar = setInterval(loadMessage, 60000);
-
-			function loadMessage() {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("username").innerHTML = JSON.parse(this.responseText)[0].username;
-						document.getElementById("message").innerHTML = JSON.parse(this.responseText)[0].text;
-					}
+				let options = {
+					weekday: 'long',
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric'
 				};
-				xhttp.open("GET", "api/v1/message", true);
-				xhttp.send();
-			}
-		</script>
+
+				document.getElementById("date").innerHTML = "Hoy es " + date.toLocaleDateString('es-ES', options);
+			</script>
+		</div>
+		
+		<div class="text-div container">
+			
+			<table class="container message-table">
+				<tr>
+					<td id="username"></td>
+					<td id="message"></td>
+				</tr>
+			</table>
+
+			<script>
+				var myVar = setInterval(loadMessage, 1000);
+
+				function loadMessage() {
+					var xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							document.getElementById("username").innerHTML = JSON.parse(this.responseText)[0].username + ": ";
+							document.getElementById("message").innerHTML = JSON.parse(this.responseText)[0].text;
+						}
+					};
+					xhttp.open("GET", "api/v1/message", true);
+					xhttp.send();
+				}
+			</script>
+		</div>
 
 	</div>
 
