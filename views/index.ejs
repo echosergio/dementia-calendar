@@ -47,24 +47,12 @@
 					let hour = date.getHours();
 
 					switch (true) {
-						case (hour > 0 && hour <= 5):
-							var dayPart = 'de madrugada';
-							break;
-						case (hour > 5 && hour <= 7):
-							var dayPart = 'por la mañana temprano';
-							break;
-						case (hour > 7 && hour <= 12):
-							var dayPart = 'por la mañana';
-							break;
-						case (hour > 12 && hour <= 14):
-							var dayPart = 'mediodía';
-							break;
-						case (hour > 14 && hour <= 19):
-							var dayPart = 'por la tarde';
-							break;
-						default:
-							var dayPart = 'por la noche noche';
-							break;
+						case (hour > 0 && hour <= 5): var dayPart = 'de madrugada'; break;
+						case (hour > 5 && hour <= 7): var dayPart = 'por la mañana temprano'; break;
+						case (hour > 7 && hour <= 12): var dayPart = 'por la mañana'; break;
+						case (hour > 12 && hour <= 14): var dayPart = 'mediodía'; break;
+						case (hour > 14 && hour <= 19): var dayPart = 'por la tarde'; break;
+						default: var dayPart = 'por la noche'; break;
 					}
 
 					document.getElementById("dayPart").innerHTML = "Es " + dayPart;
