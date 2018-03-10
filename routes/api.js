@@ -13,6 +13,7 @@ router.get('/message', function (req, res, next) {
 });
 
 router.post('/message', function (req, res, next) {
+  console.log(req.body)
   db.Message.create({
     username: req.body.user.username,
     text: req.body.message.text
