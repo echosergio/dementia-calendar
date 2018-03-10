@@ -50,7 +50,7 @@ function draw() {
         }
 
         // Numbers
-        ctx.font = '28px Noto Sans';
+        ctx.font = '28px Roboto';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         for (let i = 1; i <= 12; i++) {

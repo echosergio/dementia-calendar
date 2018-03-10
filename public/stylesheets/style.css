@@ -1,19 +1,18 @@
 body {
   margin: 0px;
   vertical-align: middle;
-  min-width:600px
+  width: 100%;
+  min-width: 900px
 }
 
 .main {
+  font-family: 'Arimo', sans-serif;
   text-align: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-right: 100px;
-  margin-left: 100px;
+  margin: 30px;
 }
 
 p {
-  font-family: 'Noto Sans', sans-serif;
+  margin: 0.6em;
   font-size: 42px;
 }
 
@@ -22,27 +21,12 @@ p {
   margin-right: auto;
 }
 
-.message-table {
-  font-family: 'Noto Sans', sans-serif;
-  font-size: 46px;
+.notes-container {
+  font-family: 'Bad Script', 'cursive';
+  font-size: 52px;
+  max-width: 750px;
 }
 
-.clock-div {
-  float:left;
-  width:50%;
-  text-align:center;
-}
-
-.text-div {
-  float:left;
-  width:50%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  text-align:center;
-}
-
-@media only screen and (max-width:1440px) {
-  .clock-div, .text-div {
-    width:100%;
-  }
+.notes-container p {
+  line-height: 1.4;
 }

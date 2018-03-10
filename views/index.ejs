@@ -5,13 +5,15 @@
 	<title>Dementia Calendar</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel='stylesheet' href='/stylesheets/style.css' />
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Arimo:700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
 </head>
 
 <body <% if (mode == 'night') { %>style="background-color:black; color:white"<% } %>>
 	<div class="main" style="overflow:auto">
 
-		<div class="clock-div container">
+		<div class="container">
 			<canvas id="clock"></canvas>
 
 			<script src="/javascripts/vector.js"></script>
@@ -24,39 +26,70 @@
 			<% } %>
 
 			<p id="date"></p>
+			<p id="dayPart"></p>
 
 			<script>
-				let date = new Date();
+				getTimeInfo();
+				setInterval(getTimeInfo, 60000);
 
-				let options = {
-					weekday: 'long',
-					year: 'numeric',
-					month: 'long',
-					day: 'numeric'
-				};
+				function getTimeInfo() {
+					let date = new Date();
 
-				document.getElementById("date").innerHTML = "Hoy es " + date.toLocaleDateString('es-ES', options);
+					let options = {
+						weekday: 'long',
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric'
+					};
+
+					document.getElementById("date").innerHTML = (date.toLocaleDateString('es-ES', options)).toUpperCase();
+
+					let hour = date.getHours();
+
+					switch (true) {
+						case (hour > 0 && hour <= 5):
+							var dayPart = 'de madrugada';
+							break;
+						case (hour > 5 && hour <= 7):
+							var dayPart = 'por la mañana temprano';
+							break;
+						case (hour > 7 && hour <= 12):
+							var dayPart = 'por la mañana';
+							break;
+						case (hour > 12 && hour <= 14):
+							var dayPart = 'mediodía';
+							break;
+						case (hour > 14 && hour <= 19):
+							var dayPart = 'por la tarde';
+							break;
+						default:
+							var dayPart = 'por la noche noche';
+							break;
+					}
+
+					document.getElementById("dayPart").innerHTML = "Es " + dayPart;
+				}
 			</script>
 		</div>
+
+		<br></br>
 		
-		<div class="text-div container">
+		<div class="container notes-container">
 			
-			<table class="container message-table">
-				<tr>
-					<td id="username"></td>
-					<td id="message"></td>
-				</tr>
-			</table>
+			<p id="note"></p>
 
 			<script>
-				var myVar = setInterval(loadMessage, 1000);
+				loadMessage();
+				setInterval(loadMessage, 60000);
 
 				function loadMessage() {
 					var xhttp = new XMLHttpRequest();
 					xhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
-							document.getElementById("username").innerHTML = JSON.parse(this.responseText)[0].username + ": ";
-							document.getElementById("message").innerHTML = JSON.parse(this.responseText)[0].text;
+							var username = JSON.parse(this.responseText)[0].username;
+							var text = JSON.parse(this.responseText)[0].text;
+
+							document.getElementById("note").innerHTML = text;
 						}
 					};
 					xhttp.open("GET", "api/v1/message", true);
