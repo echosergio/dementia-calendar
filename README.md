@@ -3,13 +3,12 @@
 Esta aplicación web está pensada para ayudar a personas con dificultades de memoria u otras capacidades de razonamiento, consiste en un panel donde se puede ver un reloj, la fecha actual y la parte del día en la que nos encontramos, además, cuenta con un apartado donde añadir notas que puedan ser de utilidad para la persona que lo consulte.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/sergiovhe/dementia-calendar/master/img/sample.png" alt="Dementia Calendar" width="350">
-  <br>
+    <img src="https://raw.githubusercontent.com/sergiovhe/dementia-calendar/master/img/sample.png" alt="Dementia Calendar" width="350">
 </p>
 
 ## Mensajes 
 
-Para añadir un mensaje existe una API en la aplicación que puede recibir la información del usuario y el texto del mensaje que se desea mostrar:
+Para añadir un mensaje la aplicación dispone de un API a través del cual se puede enviar información del usuario y el texto del mensaje que se desea mostrar:
 
 ```http
 POST /api/v1/message
@@ -48,6 +47,6 @@ curl -F "url=https://dementia-calendar/api/v1/message"  https://api.telegram.org
 Una vez configurado ya podemos iniciarlo y empezar a enviar mensajes
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/sergiovhe/dementia-calendar/master/img/iphone-telegram.png" alt="Dementia Calendar (Telegram)" width="250">
-  <br>
+    <br>
+    <img src="https://raw.githubusercontent.com/sergiovhe/dementia-calendar/master/img/iphone-telegram.png" alt="Dementia Calendar (Telegram)" width="250">
 </p>
